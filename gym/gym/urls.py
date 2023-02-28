@@ -15,8 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+
+from data.views import GymViewSet, CustomerViewSet, SubscriptionViewSet
+from data.views import AddressViewSet
+
+router = routers.SimpleRouter()
+router.register(r'gym', GymViewSet)
+router.register(r'customer', CustomerViewSet)
+router.register(r'address', AddressViewSet)
+router.register(r'subscription', SubscriptionViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('gym-data/', include('data.urls'))
+    path('gym_data/', include(router.urls)),
 ]
